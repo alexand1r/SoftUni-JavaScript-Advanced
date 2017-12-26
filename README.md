@@ -1,1 +1,11 @@
-# SoftUni-JavaScript-Advanced
+# SoftUni JavaScript Advanced
+- DOM-BOM-Events
+- jQuery
+- First Class Functions
+- Object Composition
+- Unit Testing with Mocha
+- Classes and Class Members
+- Inheritance and Prototypes
+- Modules
+- Error-Handling Exceptions
+- Iterators-Generator-Functions
