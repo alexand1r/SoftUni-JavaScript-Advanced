@@ -1,0 +1,7 @@
+{
+  "name": "application-name",
+  "dependencies": {
+    "systemjs": "^0.19.40"
+  },
+  "version": "0.0.1"
+}

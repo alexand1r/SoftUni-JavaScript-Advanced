@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table Builder</title>
+    <style>td,th { background:#DDD; padding:5px }</style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="main"></div>
+<script>
+    function tableBuilder(selector) {
+        let table = $('<table>');
+
+        function createTable(columnNames) {
+            let row = $('<tr>');
+            for (let col of columnNames) {
+                row.append($('<th>').text(col));
+            }
+
+            row.append($('<th>').text('Action'));
+            row.appendTo(table);
+            attachTable();
+        }
+
+        function fillData(dataRows) {
+            for (let dataRow of dataRows) {
+                let row = $('<tr>');
+                for (let col of dataRow) {
+                    row.append($('<td>').text(col));
+                }
+
+                row.append($('<td>')
+                        .append($('<button>')
+                                .text('Delete')
+                                .click((event) => $(event.target).parent().parent().remove())));
+
+                row.appendTo(table);
+            }
+        }
+
+        function attachTable() {
+            let selectorElement = $(selector);
+            selectorElement.empty();
+            selectorElement.append(table);
+        }
+
+        return {
+            createTable,
+            fillData
+        }
+    }
+</script>
+<script>
+    $(function() {
+        let builder = tableBuilder("#main");
+        builder.createTable(['<Name', '<Town']);
+        builder.fillData([
+            ['<Maria', '<Sofia'],
+            ['<Kiril', '<Varna'],
+            ['Ani <new>', '<Ruse'],
+        ]);
+    });
+</script>
+</body>
+</html>
+
+<!--function tableBuilder(selector) {-->
+<!--function createTable(columnNames) {-->
+<!--$(selector).empty();-->
+<!--let table = $('<table>').append($('<tr>'));-->
+    <!--for (let th of columnNames) {-->
+    <!--table.find('tr').append($('<th>').text(th.replace(/[<>&"]/g, m => ({'>': '&gt;', '<': '&lt;', '"': '&quot;', '&': '&amp;'}[m]))));-->
+        <!--}-->
+        <!--table.find('tr').append(`<th>Action</th>`);-->
+    <!--$(selector).append(table);-->
+    <!--}-->
+    <!--function fillData(dataRows) {-->
+    <!--for (let row of dataRows) {-->
+    <!--$('table').append($('<tr>')-->
+    <!--.append($('<td>')-->
+        <!--.text(row[0].replace(/[<>&"]/g, m => ({'>': '&gt;', '<': '&lt;', '"': '&quot;', '&': '&amp;'}[m]))))-->
+        <!--.append($('<td>')-->
+        <!--.text(row[1].replace(/[<>&"]/g, m => ({'>': '&gt;', '<': '&lt;', '"': '&quot;', '&': '&amp;'}[m]))))-->
+        <!--.append($('<td>')-->
+        <!--.append($('<button>')-->
+            <!--.click(function() {-->
+            <!--$(this).parent().parent().remove();-->
+            <!--})-->
+            <!--.text('Delete'))));-->
+            <!--}-->
+            <!--}-->
+
+            <!--return {createTable, fillData}-->
+            <!--}-->

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Town by Name</title>
+    <style>select, input { width: 100px }</style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body onload="attachEvents()">
+<div>Towns</div>
+<select id="towns" size="4">
+    <option>Sofia</option>
+    <option>Varna</option>
+    <option>Pleven</option>
+</select>
+<div>
+    <input type="text" id="townName" />
+    <button id="btnDelete">Delete</button>
+</div>
+<div id="result"></div>
+<script>
+    function attachEvents() {
+        let towns = [];
+        $('option').each(function() {
+            towns.push($(this).text());
+        });
+
+        $('#btnDelete').click(function() {
+            let town = $('input:text#townName').val();
+            if (towns.indexOf(town) != -1) {
+                $('#result').text(`${town} deleted.`);
+                $('option').each(function() {
+                   if ($(this).text() == town)
+                       $(this.remove());
+                });
+                let index = towns.indexOf(town);
+                (index > -1) ? towns.splice(index, 1) : console.log('error');
+            } else {
+                $('#result').text(`${town} not found.`);
+            }
+            $('input#townName').val('');
+        });
+    }
+</script>
+</body>
+</html>
+
+<!--function attachEvents() {-->
+<!--$('#btnDelete').click(deleteTowns);-->
+
+<!--function deleteTowns() {-->
+<!--let searchBox = $('#townName');-->
+<!--let needle = searchBox.val();-->
+<!--searchBox.val('');-->
+
+<!--let towns = $('#towns').find('option');-->
+
+<!--let match = false;-->
+<!--for (let town of towns) {-->
+<!--if ($(town).val() == needle) {-->
+<!--town.remove();-->
+<!--match = true;-->
+<!--}-->
+<!--}-->
+
+<!--if (match) {-->
+<!--$('#result').text(needle + ' deleted.');-->
+<!--} else {-->
+<!--$('#result').text(needle + ' not found.');-->
+<!--}-->
+<!--}-->
+<!--}-->
